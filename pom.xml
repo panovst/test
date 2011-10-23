@@ -15,6 +15,28 @@
 
 	<profiles>
 		<profile>
+			<id>linux</id>
+			<activation>
+				<os>
+					<family>Linux</family>
+				</os>
+			</activation>
+			<properties>
+				<mvn.command>mvn</mvn.command>
+			</properties>
+		</profile>
+		<profile>
+			<id>windows</id>
+			<activation>
+				<os>
+					<family>windows</family>
+				</os>
+			</activation>
+			<properties>
+				<mvn.command>mvn.bat</mvn.command>
+			</properties>
+		</profile>
+		<profile>
 			<id>p1</id>
 			<build>
 				<plugins>
@@ -30,8 +52,8 @@
 								</goals>
 								<configuration>
 									<tasks>
-										<echo>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</echo>
-										<exec executable="mvn">
+										<echo>${mvn.command} !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</echo>
+										<exec executable="${mvn.command}">
 											<arg value="clean" />
 											<arg value="compile" />
 										</exec>
