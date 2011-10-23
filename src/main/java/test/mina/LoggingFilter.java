@@ -1,7 +1,5 @@
 package test.mina;
 
-import java.util.Date;
-
 import org.apache.mina.core.filterchain.IoFilterAdapter;
 import org.apache.mina.core.filterchain.IoFilterChain;
 import org.apache.mina.core.session.IdleStatus;
