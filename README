@@ -1,0 +1,3 @@
+#
+# Run: mvn  initialize -Pp1,p2
+#
