@@ -52,7 +52,8 @@
 								</goals>
 								<configuration>
 									<tasks>
-										<echo>${mvn.command} !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</echo>
+										<echo>!!!!!!!!!!!!!!!!!!!!   CLEAN COMPILE   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</echo>
+										<echo>mvn.command: ${mvn.command}</echo>
 										<exec executable="${mvn.command}">
 											<arg value="clean" />
 											<arg value="compile" />
@@ -83,7 +84,12 @@
 								</goals>
 								<configuration>
 									<tasks>
-										<echo>test2 ECHO.</echo>
+										<echo>!!!!!!!!!!!!!!!!!!!!!!!!   PACKAGE   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!</echo>
+										<echo>mvn.command: ${mvn.command}</echo>
+										<exec executable="${mvn.command}">
+											<arg value="package" />
+										</exec>
+										<echo>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</echo>
 									</tasks>
 								</configuration>
 							</execution>
