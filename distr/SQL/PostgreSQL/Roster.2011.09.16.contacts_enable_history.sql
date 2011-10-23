@@ -1,0 +1,5 @@
+BEGIN;
+
+ALTER TABLE roster.contacts ADD COLUMN enable_history BOOLEAN DEFAULT NULL;
+
+COMMIT;

@@ -1,0 +1,105 @@
+
+    <!--
+        see Assembly Descriptor Format
+        http://maven.apache.org/plugins/maven-assembly-plugin/assembly.html
+    -->
+<assembly>
+    <id>dist</id>
+    <formats>
+        <format>dir</format>
+        <!--<format>tar.gz</format> -->
+        <format>tar.bz2</format>
+        <!-- <format>zip</format> -->
+    </formats>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>lib</outputDirectory>
+            <useProjectArtifact>false</useProjectArtifact>
+            <includes>
+            	<include>test:*</include>
+                <include>org.apache.mina:*</include>
+            </includes>
+        </dependencySet>
+    </dependencySets>
+    <fileSets>
+        <fileSet>
+            <directory>${basedir}/structure/bin</directory>
+            <includes>
+                <include>server.*</include>
+            </includes>
+            <fileMode>755</fileMode>
+            <outputDirectory>bin</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/structure/conf</directory>
+            <includes>
+                <include>*</include>
+            </includes>
+            <outputDirectory>conf</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/etc
+            </directory>
+            <includes>
+                <include>**</include>
+            </includes>
+            <outputDirectory>conf</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/structure/lib</directory>
+            <includes>
+                <include>*</include>
+            </includes>
+            <outputDirectory>lib</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/target</directory>
+            <includes>
+                <include>xmpp.server.core*.jar</include>
+            </includes>
+            <outputDirectory>lib</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/structure/osgi</directory>
+            <includes>
+                <include>*</include>
+            </includes>
+            <outputDirectory>osgi</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <includes>
+                <include />
+            </includes>
+            <outputDirectory>logs</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <includes>
+                <include />
+            </includes>
+            <outputDirectory>plugins</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}</directory>
+            <includes>
+                <include>README*</include>
+                <include>LICENSE*</include>
+                <include>NOTICE*</include>
+            </includes>
+            <outputDirectory />
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/SQL
+            </directory>
+            <includes>
+                <include>**</include>
+            </includes>
+            <outputDirectory>resources/database</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <includes>
+                <include />
+            </includes>
+            <outputDirectory>var</outputDirectory>
+        </fileSet>
+    </fileSets>
+</assembly>

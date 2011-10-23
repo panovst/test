@@ -1,0 +1,171 @@
+<configuration>
+
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator name="myEval">
+				<expression>logger.contains("ru.rambler.xmpp.server")</expression>
+			</evaluator>
+			<OnMismatch>DENY</OnMismatch>
+			<OnMatch>ACCEPT</OnMatch>
+		</filter>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%date [%thread] %level %logger{36} - %msg%n</Pattern>
+		</layout>
+	</appender>
+
+
+	<appender name="file"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>/tmp/xmppserver.%d{yyyy-MM-dd}.log</FileNamePattern>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator name="myEval">
+				<expression>
+					logger.contains("ru.rambler") &amp;&amp;
+                    logger.contains("org.springframework")  &amp;&amp;
+					!logger.contains("ClientConnectionHandler") &amp;&amp;
+					!logger.contains("HttpBindHandlerServiceImpl") &amp;&amp;
+					!logger.contains("CrossDomainPolisyHandler")
+			    </expression>
+			</evaluator>
+			<OnMismatch>DENY</OnMismatch>
+			<OnMatch>ACCEPT</OnMatch>
+		</filter>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%date [%thread] %level %logger{36} - %msg %ex%n</Pattern>
+		</layout>
+	</appender>
+
+	<appender name="traffic_xmpp"
+		class="ch.qos.logback.core.rolling.RollingFileAppender" additivity="false">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>/tmp/xmpp.inout.%d{yyyy-MM-dd}.log</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%date [%thread] %level %logger{36} - %msg %ex%n</Pattern>
+		</layout>
+	</appender>
+
+    <appender name="traffic_component"
+        class="ch.qos.logback.core.rolling.RollingFileAppender" additivity="false">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>/tmp/component.inout.%d{yyyy-MM-dd}.log</FileNamePattern>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%date [%thread] %level %logger{36} - %msg %ex%n</Pattern>
+        </layout>
+    </appender>
+
+	<appender name="traffic_bosh"
+		class="ch.qos.logback.core.rolling.RollingFileAppender" additivity="false">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>/tmp/bosh.inout.%d{yyyy-MM-dd}.log</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%date [%thread] %level %logger{36} - %msg %ex%n</Pattern>
+		</layout>
+	</appender><!--
+
+	<appender name="traffic_jetty"
+		class="ch.qos.logback.core.rolling.RollingFileAppender" additivity="false">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>/tmp/jetty.inout.%d{yyyy-MM-dd}.log</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%date [%thread] %level %logger{36} - %msg %ex%n</Pattern>
+		</layout>
+	</appender>
+
+	-->
+	<appender name="jabber_stat"
+		class="ch.qos.logback.core.rolling.RollingFileAppender" additivity="false">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>/tmp/jabber.stat.%d{yyyy-MM-dd}.log</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%date [%thread] %level %logger{36} - %msg %ex%n</Pattern>
+		</layout>
+	</appender>
+
+	<appender name="federation"
+		class="ch.qos.logback.core.rolling.RollingFileAppender" additivity="false">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>/tmp/federation.%d{yyyy-MM-dd}.log</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%date [%thread] %level %logger{36} - %msg %ex%n</Pattern>
+		</layout>
+	</appender>
+
+	<!--
+		<appender name="email"
+		class="ch.qos.logback.classic.net.SMTPAppender">
+	-->
+	<!--<filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+	<!--<level>WARN</level>-->
+	<!--</filter>-->
+	<!--<SMTPHost>prime.rambler.ramblermedia.com</SMTPHost>-->
+	<!--<To>bulatnig@rambler-mobile.ru</To>-->
+	<!--<From>bulatnig@rambler-mobile.ru</From>-->
+	<!--<Subject>XMPP server alert: %msg</Subject>-->
+	<!--<Username></Username>-->
+	<!--<Password></Password>-->
+	<!--<layout class="ch.qos.logback.classic.PatternLayout">-->
+	<!--<Pattern>%date %msg %ex%n</Pattern>-->
+	<!--</layout>-->
+	<!--</appender>-->
+
+	<logger name="xmpp.inout"
+		level="WARN">
+		<appender-ref ref="traffic_xmpp" />
+	</logger>
+
+    <logger name="component.inout"
+        level="WARN">
+        <appender-ref ref="traffic_component" />
+    </logger>
+
+	<logger
+		name="ru.rambler.xmpp.server.bosh.handler.impl.HttpBindHandlerServiceImpl"
+		level="WARN">
+		<appender-ref ref="traffic_bosh" />
+	</logger><!--
+
+	<logger
+		name="org.eclipse.jetty.util.log"
+		level="WARN">
+		<appender-ref ref="traffic_jetty" />
+	</logger>
+
+	--><logger
+		name="ForwardingExecutorMonitor"
+		level="WARN">
+		<appender-ref ref="jabber_stat" />
+	</logger>
+
+	<!--<logger
+		name="RepeatBinding"
+		level="WARN">
+		<appender-ref ref="repeat_binding" />
+	</logger>-->
+
+	<logger name="ru.rambler.xmpp.server.core.net.nio.CrossDomainPolisyHandler"
+		level="WARN">
+		<appender-ref ref="stdout" />
+	</logger>
+
+	<logger
+		name="federation"
+		level="WARN">
+		<appender-ref ref="federation" />
+	</logger>
+
+	<root>
+		<level value="DEBUG" />
+		<!--<appender-ref ref="stdout"/>-->
+		<appender-ref ref="file" />
+		<!--<appender-ref ref="email"/>-->
+	</root>
+
+</configuration>
