@@ -41,6 +41,8 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
+						<!-- ВНИМАНИЕ! Обязательный тег! Чтобы профиль не выполнялся для модулей проекта -->
+						<inherited>false</inherited>
 						<executions>
 							<execution>
 								<id>test1ex</id>
@@ -50,7 +52,7 @@
 								</goals>
 								<configuration>
 									<tasks>
-										<echo>!!!!!!!!!!!!!!!!!!!!   CLEAN COMPILE   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</echo>
+										<echo>!!!!!!!!!!!!!!!!!!!!   CLEAN INSTALL   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</echo>
 										<echo>mvn.command: ${mvn.command}</echo>
 										<exec failonerror="true" executable="${mvn.command}">
 											<arg value="clean" />
@@ -75,6 +77,8 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
+						<!-- ВНИМАНИЕ! Обязательный тег! Чтобы профиль не выполнялся для модулей проекта -->
+						<inherited>false</inherited>
 						<executions>
 							<execution>
 								<id>test2ex</id>
@@ -84,10 +88,11 @@
 								</goals>
 								<configuration>
 									<tasks>
-										<echo>!!!!!!!!!!!!!!!!!!!!!!!!   PACKAGE   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!</echo>
+										<echo>!!!!!!!!!!!!!!!!!!!!!!!!   ASSEMBLY   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!</echo>
 										<echo>mvn.command: ${mvn.command}</echo>
 										<exec failonerror="true" executable="${mvn.command}">
-											<arg value="package" />
+											<arg value="assembly:assembly" />
+											<arg value="-fdistr/pom.xml" />
 											<arg value="-DskipTests" />
 										</exec>
 										<echo>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</echo>
