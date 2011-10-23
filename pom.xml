@@ -31,7 +31,10 @@
 								<configuration>
 									<tasks>
 										<echo>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</echo>
-										<exec executable="mvn"><arg value="-version"/></exec>
+										<exec executable="mvn">
+											<arg value="clean" />
+											<arg value="compile" />
+										</exec>
 										<echo>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</echo>
 									</tasks>
 								</configuration>
