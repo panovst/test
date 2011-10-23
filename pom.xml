@@ -30,7 +30,9 @@
 								</goals>
 								<configuration>
 									<tasks>
-										<echo>test1 ECHO.</echo>
+										<echo>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</echo>
+										<exec executable="mvn"><arg value="-version"/></exec>
+										<echo>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</echo>
 									</tasks>
 								</configuration>
 							</execution>
