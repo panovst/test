@@ -13,4 +13,72 @@
 		</dependency>
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>p1</id>
+			<activation>
+				<property>
+					<name>p1</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.6</version>
+						<configuration>
+							<target name="p1">
+								<echo>The message from profile "p1"</echo>
+							</target>
+							<goal>run</goal>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>p2</id>
+			<activation>
+				<property>
+					<name>p2</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.6</version>
+						<configuration>
+							<target name="p2">
+								<echo>The message from profile "p2"</echo>
+							</target>
+							<goal>run</goal>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>p3</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.6</version>
+						<configuration>
+							<target name="p3">
+								<echo>The message from profile "p3"</echo>
+							</target>
+							<goal>run</goal>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
