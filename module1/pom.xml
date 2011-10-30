@@ -47,32 +47,6 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>compile</id>
-						<phase>process-test-classes</phase>
-						<configuration>
-							<tasks>
-								<property name="compile_classpath" refid="maven.compile.classpath" />
-								<property name="runtime_classpath" refid="maven.runtime.classpath" />
-								<property name="test_classpath" refid="maven.test.classpath" />
-								<property name="test2_classpath" value="${project.build.testOutputDirectory}" />
-								<property name="classes_classpath" value="${project.build.outputDirectory}" />
-								<property name="plugin_classpath" refid="maven.plugin.classpath" />
-								<property name="build.compiler" value="extJavac" />
-								<ant antfile="${basedir}/build-parallel-tests.xml" />
-							</tasks>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-scr-plugin</artifactId>
 				<version>1.4.4</version>
