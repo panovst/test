@@ -10,7 +10,54 @@
 		<module>module1</module>
 		<module>module2</module>
 	</modules>
-	
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>ru.rambler</groupId>
+					<artifactId>maven-junit4osgi-plugin-ce</artifactId>
+					<version>1.0.0_patch13</version>
+					<executions>
+						<execution>
+							<id>prepare-structure</id>
+							<phase>compile</phase>
+							<goals>
+								<goal>prepare-structure</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>test</id>
+							<phase>integration-test</phase>
+							<goals>
+								<goal>test</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>copy-dependencies</id>
+							<phase>package</phase>
+							<goals>
+								<goal>copy-dependencies</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${project.build.directory}/alldependencies</outputDirectory>
+								<overWriteReleases>false</overWriteReleases>
+								<overWriteSnapshots>false</overWriteSnapshots>
+								<overWriteIfNewer>true</overWriteIfNewer>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 	<profiles>
 		<profile>
 			<id>linux</id>
@@ -41,7 +88,8 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
-						<!-- ВНИМАНИЕ! Обязательный тег! Чтобы профиль не выполнялся для модулей проекта -->
+						<!-- ВНИМАНИЕ! Обязательный тег! Чтобы профиль не выполнялся для модулей 
+							проекта -->
 						<inherited>false</inherited>
 						<executions>
 							<execution>
@@ -52,7 +100,8 @@
 								</goals>
 								<configuration>
 									<tasks>
-										<echo>!!!!!!!!!!!!!!!!!!!!   CLEAN INSTALL   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</echo>
+										<echo>!!!!!!!!!!!!!!!!!!!! CLEAN INSTALL
+											!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</echo>
 										<echo>mvn.command: ${mvn.command}</echo>
 										<exec failonerror="true" executable="${mvn.command}">
 											<arg value="clean" />
@@ -77,7 +126,8 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
-						<!-- ВНИМАНИЕ! Обязательный тег! Чтобы профиль не выполнялся для модулей проекта -->
+						<!-- ВНИМАНИЕ! Обязательный тег! Чтобы профиль не выполнялся для модулей 
+							проекта -->
 						<inherited>false</inherited>
 						<executions>
 							<execution>
@@ -88,7 +138,8 @@
 								</goals>
 								<configuration>
 									<tasks>
-										<echo>!!!!!!!!!!!!!!!!!!!!!!!!   ASSEMBLY   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!</echo>
+										<echo>!!!!!!!!!!!!!!!!!!!!!!!! ASSEMBLY
+											!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</echo>
 										<echo>mvn.command: ${mvn.command}</echo>
 										<exec failonerror="true" executable="${mvn.command}">
 											<arg value="assembly:assembly" />

@@ -9,5 +9,106 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>test</groupId>
 	<artifactId>module1</artifactId>
+	<packaging>bundle</packaging>
 
+	<dependencies>
+		<dependency>
+			<groupId>ru.rambler</groupId>
+			<artifactId>org.apache.felix.ipojo.junit4osgi</artifactId>
+			<version>1.0.0_patch5</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+	
+		<sourceDirectory>src/ftest/build-in/parallel</sourceDirectory>
+<!-- 		<resources>
+			<resource>
+				<directory>src/ftest</directory>
+			</resource>
+		</resources>
+ -->
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>UTF-8</encoding>
+					<sourceEncoding>UTF-8</sourceEncoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>compile</id>
+						<phase>process-test-classes</phase>
+						<configuration>
+							<tasks>
+								<property name="compile_classpath" refid="maven.compile.classpath" />
+								<property name="runtime_classpath" refid="maven.runtime.classpath" />
+								<property name="test_classpath" refid="maven.test.classpath" />
+								<property name="test2_classpath" value="${project.build.testOutputDirectory}" />
+								<property name="classes_classpath" value="${project.build.outputDirectory}" />
+								<property name="plugin_classpath" refid="maven.plugin.classpath" />
+								<property name="build.compiler" value="extJavac" />
+								<ant antfile="${basedir}/build-parallel-tests.xml" />
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-scr-plugin</artifactId>
+				<version>1.4.4</version>
+				<executions>
+					<execution>
+						<id>generate-scr-scrdescriptor</id>
+						<goals>
+							<goal>scr</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.1.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-Category>xmpp</Bundle-Category>
+						<Bundle-Classpath>.</Bundle-Classpath>
+						<Bundle-Copyright>Rambler (c) 2009</Bundle-Copyright>
+						<Bundle-RequiredExecutionEnvironment>JavaSE-1.6
+                        </Bundle-RequiredExecutionEnvironment>
+					</instructions>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>ru.rambler</groupId>
+				<artifactId>maven-junit4osgi-plugin-ce</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>
