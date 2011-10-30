@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     21.03.2010 16:56:26                                                        
+
+     project    
+     description
+                   
+     stas                                                                
+     ====================================================================== -->
+<project name="project" default="default">
+	<description>
+            description
+    </description>
+
+	<target name="init">
+		<property name="src" value="${basedir}\src\ftest\build-in\parallel"/>
+		<property name="lib" value="lib"/>
+		<property name="ftest-classes" value="${basedir}\target\ftest-classes\build-in\parallel"/>
+		<mkdir dir="${ftest-classes}"/>
+	</target>
+
+	<!-- ================================= 
+          target: default              
+         ================================= -->
+	<target name="default" depends="init" description="description">
+		
+		<javac encoding="UTF-8" source="1.6" srcdir="${src}" destdir="${ftest-classes}" classpath="${compile_classpath};${test_classpath};${test2_classpath};${classes_classpath}">
+<!--
+			<classpath>
+				<fileset dir="${lib}">
+					<include name="*.jar" />
+				</fileset>
+			</classpath>
+			-->
+		</javac>
+	</target>
+
+</project>
